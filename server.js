@@ -17,17 +17,18 @@ app.get('/favorites', function(req, res) {
     res.send(data);
 });
 
-// app.get('favorites', function(req, res){
-//   if(!req.body.name || !req.body.oid){
-//     res.send("Error");
-//     return
+app.get('/favorites', function(req, res) {
+    if (!req.body.name || !req.body.oid) {
+        res.send('Error');
+        return;
+    }
 
-//   var data = JSON.parse(fs.readFileSync('./data.json'));
-//   data.push(req.body);
-//   fs.writeFile('./data.json', JSON.stringify(data));
-//   res.setHeader('Content-Type', 'application/json');
-//   res.send(data);
-// });
+    var data = JSON.parse(fs.readFileSync('./data.json'));
+    data.push(req.body);
+    fs.writeFile('./data.json', JSON.stringify(data));
+    res.setHeader('Content-Type', 'application/json');
+    res.send(data);
+});
 
 // Catch any non-defined routes
 app.use((req, res) => {
