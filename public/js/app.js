@@ -2,6 +2,7 @@ let searchField = document.getElementById('search');
 let searchButton = document.getElementsByTagName('button')[0];
 
 const movies = [];
+let error = '';
 
 searchButton.addEventListener('click', (event) => {
     event.preventDefault();
@@ -17,15 +18,20 @@ searchButton.addEventListener('click', (event) => {
             return response.json();
         })
         .then((data) => {
-            data.Search.forEach((movie) => {
-                let properMovie = {
-                    id: movie.imdbID,
-                    poster: movie.Poster,
-                    title: movie.Title,
-                    year: movie.Year
-                };
-                movies.push(properMovie);
-            });
+            if (data.Response === 'False') {
+                error = data.Error;
+            } else {
+                error = '';
+                data.Search.forEach((movie) => {
+                    let properMovie = {
+                        id: movie.imdbID,
+                        poster: movie.Poster,
+                        title: movie.Title,
+                        year: movie.Year
+                    };
+                    movies.push(properMovie);
+                });
+            }
         })
         .then(() => {
             renderMovies();
@@ -34,5 +40,5 @@ searchButton.addEventListener('click', (event) => {
 });
 
 function renderMovies() {
-    console.log(movies);
+    console.log(error, movies);
 }
