@@ -49,9 +49,14 @@
         }
         if (movies.length > 0) {
             for (const movie of movies) {
-                let movieItem = document.createElement('li');
+                const movieItem = document.createElement('li');
+                const favoriteButton = document.createElement('button');
+                favoriteButton.setAttribute('class', 'favorite-button');
+                favoriteButton.innerHTML = '&hearts;';
+
                 movieItem.setAttribute('class', 'movie-list__item');
                 movieItem.textContent = movie.title;
+                movieItem.insertAdjacentElement('beforeend', favoriteButton);
                 movieList.appendChild(movieItem);
             }
         }
