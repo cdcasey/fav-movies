@@ -1,4 +1,5 @@
 var express = require('express');
+const PORT = process.env.PORT || 3000;
 var app = express();
 var fs = require('fs');
 var path = require('path');
@@ -39,6 +40,6 @@ app.use((err, req, res, next) => {
     res.status(500).json({ message: 'Internal Server Error' });
 });
 
-app.listen(3000, function() {
-    console.log('Listening on port 3000');
+app.listen(PORT, function() {
+    console.log(`Listening on port ${PORT}`);
 });
