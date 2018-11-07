@@ -5,9 +5,20 @@
     const searchButton = document.getElementsByTagName('button')[0];
     const movieList = document.getElementsByClassName('movie-list')[0];
     const errorField = document.getElementsByClassName('error')[0];
+    const favoritesLink = document.getElementById('favorites-button');
 
     let movies = [];
     let error = '';
+
+    favoritesLink.addEventListener('click', (event) => {
+        fetch(`/favorites`)
+            .then((response) => {
+                return response.json();
+            })
+            .then((data) => {
+                console.log(data);
+            });
+    });
 
     searchButton.addEventListener('click', (event) => {
         event.preventDefault();
