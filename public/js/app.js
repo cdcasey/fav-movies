@@ -37,12 +37,26 @@
     });
 
     favoritesLink.addEventListener('click', (event) => {
+        movies = [];
+
         fetch(`/favorites`)
             .then((response) => {
                 return response.json();
             })
             .then((data) => {
-                console.log(data);
+                if (Object.keys(data).length === 0) {
+                    error = 'No favorites saved';
+                } else {
+                    for (const movieId in data) {
+                        if (data.hasOwnProperty(movieId)) {
+                            const movie = data[movieId];
+                            movies.push(movie);
+                        }
+                    }
+                }
+            })
+            .then(() => {
+                renderMovies();
             });
     });
 
