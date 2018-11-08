@@ -17,15 +17,15 @@ app.get('/favorites', function(req, res) {
     res.send(data);
 });
 
-app.get('/favorites', function(req, res) {
-    if (!req.body.name || !req.body.oid) {
-        res.send('Error');
-        return;
+app.post('/favorites', function(req, res) {
+    if (!req.body.title || !req.body.id) {
+        res.json({ message: 'Error: favorite must include a name and id.' });
+        // return;
     }
 
     var data = JSON.parse(fs.readFileSync('./data.json'));
-    data.push(req.body);
-    fs.writeFile('./data.json', JSON.stringify(data));
+    data[req.body.id] = req.body;
+    fs.writeFileSync('./data.json', JSON.stringify(data));
     res.setHeader('Content-Type', 'application/json');
     res.send(data);
 });
