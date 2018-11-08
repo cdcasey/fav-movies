@@ -1,0 +1,7 @@
+.movie-list__item:hover {
+    cursor: pointer;
+}
+
+.hidden {
+    display: none;
+}

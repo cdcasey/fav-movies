@@ -11,10 +11,10 @@
     let error = '';
 
     movieList.addEventListener('click', (event) => {
-        const button = event.target;
+        const el = event.target;
 
-        if (button.classList.contains('favorite-button')) {
-            const movie = movies[button.dataset.listIndex];
+        if (el.classList.contains('favorite-button')) {
+            const movie = movies[el.dataset.listIndex];
             fetch('/favorites', {
                 method: 'POST',
                 body: JSON.stringify(movie),
@@ -27,7 +27,12 @@
                     alert(`${movie.title} added to favorites.`);
                 })
                 .catch(console.error);
-            button.setAttribute('style', 'color: red');
+            el.setAttribute('style', 'color: red');
+        }
+
+        if (el.classList.contains('movie-list__item')) {
+            const plotDiv = event.target.firstChild.nextSibling.nextSibling;
+            plotDiv.classList.toggle('hidden');
         }
     });
 
@@ -84,14 +89,24 @@
             for (const [index, movie] of movies.entries()) {
                 const movieItem = document.createElement('li');
                 const favoriteButton = document.createElement('button');
+                const plotDiv = document.createElement('div');
+
                 favoriteButton.setAttribute('class', 'favorite-button');
                 favoriteButton.setAttribute('data-list-index', index);
                 favoriteButton.innerHTML = '&hearts;';
 
+                plotDiv.setAttribute('class', 'movie-plot hidden');
+
                 movieItem.setAttribute('class', 'movie-list__item');
                 movieItem.textContent = movie.title;
                 movieItem.insertAdjacentElement('beforeend', favoriteButton);
+                movieItem.insertAdjacentElement('beforeend', plotDiv);
                 movieList.appendChild(movieItem);
+                fetch(`https://www.omdbapi.com/?apikey=27549c19&i=${movie.id}`)
+                    .then((data) => data.json())
+                    .then((response) => {
+                        plotDiv.innerText = response.Plot;
+                    });
             }
         }
         errorField.textContent = error;
