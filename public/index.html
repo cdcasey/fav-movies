@@ -11,19 +11,21 @@
 </head>
 
 <body>
-    <form>
-        <div class="search">
-            <div class="search__field">
-                <input type="text" placeholder="Enter movie title e.g. Jumanji" id="search__button" name="search" />
+    <nav class="navigation">
+        <form class="navigation__form">
+            <div class="search">
+                <div class="search__field">
+                    <input type="text" placeholder="Enter movie title e.g. Jumanji" id="search__button" name="search" />
+                </div>
+
+                <button class="search__button" type="submit" name="action">
+                    Search
+                </button>
             </div>
+        </form>
 
-            <button class="search__button" type="submit" name="action">
-                Search
-            </button>
-        </div>
-    </form>
-
-    <button id="favorites-button">View Favorites</button>
+        <button id="favorites-button">View Favorites</button>
+    </nav>
 
     <ul class="movie-list"></ul>
     <div class="error"></div>

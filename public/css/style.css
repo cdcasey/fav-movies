@@ -1,5 +1,30 @@
+.navigation {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.movie-list {
+    list-style-type: none;
+}
+
+.movie-list__item {
+    margin-bottom: 1rem;
+}
+
 .movie-list__item:hover {
     cursor: pointer;
+}
+
+.favorite-button {
+    margin-left: 10px;
+    border: none;
+    font-size: 1.3rem;
+    border-radius: 50%;
+    background-color: #c9c9c9;
+    color: white;
+    outline: black;
+    padding: 0px 4px;
 }
 
 .hidden {
